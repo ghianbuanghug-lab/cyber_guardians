@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyber-dark: #0a0e1a;
+  --cyber-blue: #00d4ff;
+  --cyber-green: #00ff88;
+  --cyber-red: #ff3366;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--cyber-dark);
+  color: #e2e8f0;
+  font-family: 'Exo 2', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0e1a; }
+::-webkit-scrollbar-thumb { background: #00d4ff44; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00d4ff; }
+
+/* Cyber grid background */
+.cyber-grid {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Glow text */
+.glow-blue { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff44; }
+.glow-green { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff8844; }
+.glow-red { text-shadow: 0 0 20px #ff3366, 0 0 40px #ff336644; }
+.glow-yellow { text-shadow: 0 0 20px #ffd700, 0 0 40px #ffd70044; }
+
+/* Panel */
+.cyber-panel {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Scan line effect */
+.scanline::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Button styles */
+.btn-cyber {
+  background: transparent;
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.1), transparent);
+  transition: left 0.3s;
+}
+.btn-cyber:hover::before { left: 100%; }
+.btn-cyber:hover {
+  background: rgba(0,212,255,0.1);
+  box-shadow: 0 0 20px rgba(0,212,255,0.4);
+  transform: translateY(-1px);
+}
+
+.btn-cyber-green {
+  border-color: #00ff88;
+  color: #00ff88;
+}
+.btn-cyber-green::before { background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent); }
+.btn-cyber-green:hover { background: rgba(0,255,136,0.1); box-shadow: 0 0 20px rgba(0,255,136,0.4); }
+
+.btn-cyber-red {
+  border-color: #ff3366;
+  color: #ff3366;
+}
+.btn-cyber-red:hover { background: rgba(255,51,102,0.1); box-shadow: 0 0 20px rgba(255,51,102,0.4); }
+
+/* Progress bar */
+.progress-bar {
+  height: 6px;
+  background: rgba(0,212,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #00ff88);
+  transition: width 0.5s ease;
+}
+
+/* Card hover */
+.cyber-card {
+  transition: all 0.3s;
+}
+.cyber-card:hover {
+  border-color: rgba(0,212,255,0.5) !important;
+  box-shadow: 0 0 30px rgba(0,212,255,0.15);
+  transform: translateY(-2px);
+}
+
+/* Input */
+.cyber-input {
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: #e2e8f0;
+  font-family: 'Share Tech Mono', monospace;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.cyber-input:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 15px rgba(0,212,255,0.2);
+}
+.cyber-input::placeholder { color: rgba(148,163,184,0.5); }
+
+/* Animated typing cursor */
+.cursor::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+  color: #00d4ff;
+}
+
+/* XP bar pulse */
+@keyframes xp-pulse {
+  0% { box-shadow: 0 0 5px #00d4ff44; }
+  50% { box-shadow: 0 0 15px #00d4ff; }
+  100% { box-shadow: 0 0 5px #00d4ff44; }
+}
+
+.xp-bar { animation: xp-pulse 2s ease-in-out infinite; }
+
+/* Room card */
+.room-card {
+  position: relative;
+  overflow: hidden;
+}
+.room-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
